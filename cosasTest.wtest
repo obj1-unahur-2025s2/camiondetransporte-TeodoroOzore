@@ -1,9 +1,65 @@
 import cosas.*
 
-describe "group of test for cosas" {
+describe "test de cosas" {
 
-  test "first test" {
-    assert.that(true)
+  test "peso y peligrosidad de knigthRider" {
+    assert.equals(500, knigthRider.peso())
+    assert.equals(10,  knigthRider.peligrosidad())
   }
 
+  test "peso y peligrosidad de bumblebee en modo auto" {
+    assert.equals(800, bumblebee.peso())
+    assert.equals(15, bumblebee.peligrosidad())
+  }
+  test "peso y peligrosidad de bumblebee en modo robot" {
+    bumblebee.cambiarForma()
+    assert.equals(800, bumblebee.peso())
+    assert.equals(30, bumblebee.peligrosidad())
+  }
+
+  test "peso y peligrosidad de un paquete de ladrillos" {
+    paqueteDeLadrillos.cargarLadrillos(500)
+    assert.equals(1000, paqueteDeLadrillos.peso())
+    assert.equals(2, paqueteDeLadrillos.peligrosidad())
+  }
+
+  test "peso y peligrosidad de una carga de arena" {
+    arenaAGranel.cargarArena(600)
+    assert.equals(1, arenaAGranel.peligrosidad())
+    assert.equals(600, arenaAGranel.peso())
+  }
+
+  test "peso y peligrosidad de la bateria aerea con misiles cargados" {
+    assert.equals(300, bateriaAntiaerea.peso())
+    assert.equals(100, bateriaAntiaerea.peligrosidad())
+  }
+  test "peso y peligrosidad de la bateria aerea sin misiles cargados" {
+    bateriaAntiaerea.cambiarCarga()
+    assert.equals(200, bateriaAntiaerea.peso())
+    assert.equals(0, bateriaAntiaerea.peligrosidad())
+  }
+
+
+  test "peso y peligrosidad del contenedor portuario vacio" {
+    assert.equals(100, contenedorPortuario.peso())
+    assert.equals(0, contenedorPortuario.peligrosidad())
+  }
+  test "peso y peligrosidad del contenedor portuario con bumblebee y knigth rider dentro" {
+    contenedorPortuario.cargarCosa(bumblebee)
+    contenedorPortuario.cargarCosa(knigthRider)
+    assert.equals(1400, contenedorPortuario.peso())
+    assert.equals(15, contenedorPortuario.peligrosidad())
+  }
+
+  test "peso y peligrosidad de los residuos radiactivos" {
+    residuosRadiactivos.cambiarPeso(250)
+    assert.equals(250, residuosRadiactivos.peso())
+    assert.equals(200, residuosRadiactivos.peligrosidad())
+  }
+
+  test "peso y peligrosidad del embalaje de seguridad con un knigth rider dentro" {
+    embalajeDeSeguridad.envolverCosa(knigthRider)
+    assert.equals(500, embalajeDeSeguridad.peso())
+    assert.equals(5, embalajeDeSeguridad.peligrosidad())
+  }
 }
